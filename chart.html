@@ -1,49 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pie Chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <canvas id="myPieChart"></canvas>
-    <script>
-        // Função para obter parâmetros da URL
-        function getParameterByName(name, url = window.location.href) {
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-        // Obter dados via URL
-        const suaParte = parseFloat(getParameterByName('suaParte')) || 0; // Default 0 se não especificado
-        const outraParte = parseFloat(getParameterByName('outraParte')) || 0; // Default 0 se não especificado
-
-        const data = {
-            labels: [
-                'Frações Restantes',
-                'Fração Adquirida'
-            ],
+<script>
+fetch('https://<seu-site-wix>/_functions/myChartData')
+  .then(response => response.json())
+  .then(data => {
+    const ctx = document.getElementById('myPieChart').getContext('2d');
+    const myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Frações restantes', 'Fração adquirida'],
             datasets: [{
-                label: 'Frações',
-                data: [outraParte, suaParte],
-                backgroundColor: ['#CCCCCC', '#0E344A'],
-                hoverOffset: 4
+                data: [data.outraParte, data.suaParte],
+                backgroundColor: ['#CCCCCC', '#OE344A'],
+                hoverBackgroundColor: ['#CCCCCC', '#OE344A']
             }]
-        };
-
-        const config = {
-            type: 'pie',
-            data: data,
-        };
-
-        const myPieChart = new Chart(
-            document.getElementById('myPieChart'),
-            config
-        );
-    </script>
-</body>
-</html>
+        }
+    });
+  })
+  .catch(error => console.error('Error loading the data: ', error));
+</script>

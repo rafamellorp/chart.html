@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pie Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myPieChart"></canvas>
+    <script>
+        const data = {
+            labels: [
+                'Outra Parte',
+                'Sua Parte'
+            ],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [300, 50], // Valores que você substituirá dinamicamente
+                backgroundColor: ['#OE344A', '#CCCCCC'],
+                hoverOffset: 4
+            }]
+        };
+
+        const config = {
+            type: 'pie',
+            data: data,
+        };
+
+        const myPieChart = new Chart(
+            document.getElementById('myPieChart'),
+            config
+        );
+    </script>
+</body>
+</html>

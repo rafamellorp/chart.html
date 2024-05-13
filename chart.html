@@ -1,7 +1,8 @@
 <script>
-fetch('https://<seu-site-wix>/_functions/myChartData')
+fetch('https://limpaimovel.com.br/_functions/myChartData')
   .then(response => response.json())
   .then(data => {
+    console.log(data);  // Verifique se os dados estão corretos
     const ctx = document.getElementById('myPieChart').getContext('2d');
     const myPieChart = new Chart(ctx, {
         type: 'pie',
@@ -12,8 +13,22 @@ fetch('https://<seu-site-wix>/_functions/myChartData')
                 backgroundColor: ['#CCCCCC', '#OE344A'],
                 hoverBackgroundColor: ['#CCCCCC', '#OE344A']
             }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        fontColor: 'rgb(255, 99, 132)'
+                    }
+                }
+            }
         }
     });
   })
-  .catch(error => console.error('Error loading the data: ', error));
-</script>
+  .catch(error => {
+    console.error('Error loading the data: ', error);
+    alert('Error loading the data: ' + error.message); // Adiciona um alerta para verificação
+  });

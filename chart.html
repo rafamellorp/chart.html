@@ -8,15 +8,29 @@
 <body>
     <canvas id="myPieChart"></canvas>
     <script>
+        // Função para obter parâmetros da URL
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Obter dados via URL
+        const suaParte = parseFloat(getParameterByName('suaParte')) || 0; // Default 0 se não especificado
+        const outraParte = parseFloat(getParameterByName('outraParte')) || 0; // Default 0 se não especificado
+
         const data = {
             labels: [
-                'Outra Parte',
-                'Sua Parte'
+                'Frações Restantes',
+                'Fração Adquirida'
             ],
             datasets: [{
-                label: 'My First Dataset',
-                data: [300, 50], // Valores que você substituirá dinamicamente
-                backgroundColor: ['#OE344A', '#CCCCCC'],
+                label: 'Frações',
+                data: [outraParte, suaParte],
+                backgroundColor: ['#CCCCCC', '#0E344A'],
                 hoverOffset: 4
             }]
         };

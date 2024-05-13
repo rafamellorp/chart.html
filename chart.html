@@ -37,13 +37,14 @@
                         }]
                     },
                     options: {
-                        responsive: true
-                        legend: {
-                            display: false  // Desativa a exibição da legenda
-                        }
+                    responsive: true,
+                    legend: {
+                        display: false  // Desativa a exibição da legenda
                     }
-                });
-            })
+                }
+            });
+        })
+
             .catch(error => {
                 console.error('Error loading the data:', error);
                 alert('Error loading the data: ' + error.message);

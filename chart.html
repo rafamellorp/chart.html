@@ -1,48 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pie Chart</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        canvas {
-            width: 400px;
-            height: 400px;
+<script>
+    fetch('https://limpaimovel.com.br/_functions/myChartData')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.statusText);
         }
-    </style>
-</head>
-<body>
-    <canvas id="myPieChart"></canvas>
-    <script>
-        fetch('https://limpaimovel.com.br/_functions/myChartData')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.statusText);
+        return response.json();
+    })
+    .then(data => {
+        console.log('Data received:', data);
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+        const myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Frações restantes', 'Fração adquirida'],
+                datasets: [{
+                    data: [data.outraParte, data.suaParte],
+                    backgroundColor: ['#CCCCCC', '#E3444A'],  // Corrigido para E3444A
+                    hoverBackgroundColor: ['#CCCCCC', '#E3444A']
+                }]
+            },
+            options: {
+                responsive: true
             }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Data received:', data);
-            const ctx = document.getElementById('myPieChart').getContext('2d');
-            const myPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Frações restantes', 'Fração adquirida'],
-                    datasets: [{
-                        data: [data.outraParte, data.suaParte],
-                        backgroundColor: ['#CCCCCC', '#OE344A'],
-                        hoverBackgroundColor: ['#CCCCCC', '#OE344A']
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
-        })
-        .catch(error => {
-            console.error('Error loading the data:', error);
-            alert('Error loading the data: ' + error.message);
         });
-    </script>
-</body>
-</html>
+    })
+    .catch(error => {
+        console.error('Error loading the data:', error);
+        alert('Error loading the data: ' + error.message);
+    });
+</script>

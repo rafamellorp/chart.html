@@ -1,39 +1,39 @@
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('https://limpaimovel.com.br/_functions/myChartData')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok: ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Data received:', data);
-        const canvas = document.getElementById('myPieChart');
-        if (!canvas) {
-            console.error('Canvas element not found!');
-            return;
-        }
-        const ctx = canvas.getContext('2d');
-        const myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Frações restantes', 'Fração adquirida'],
-                datasets: [{
-                    data: [parseInt(data.outraParte, 10), parseInt(data.suaParte, 10)],
-                    backgroundColor: ['#CCCCCC', '#E3444A'],
-                    hoverBackgroundColor: ['#CCCCCC', '#E3444A']
-                }]
-            },
-            options: {
-                responsive: true
+// Aguardar o DOM estar completamente carregado
+document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('myPieChart');
+    if (canvas) {
+        fetch('https://limpaimovel.com.br/_functions/myChartData')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
             }
+            return response.json();
+        })
+        .then(data => {
+            const ctx = canvas.getContext('2d');
+            const myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Frações restantes', 'Fração adquirida'],
+                    datasets: [{
+                        data: [parseInt(data.outraParte, 10), parseInt(data.suaParte, 10)],
+                        backgroundColor: ['#CCCCCC', '#E3444A'],
+                        hoverBackgroundColor: ['#CCCCCC', '#E3444A']
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error loading the data:', error);
+            alert('Error loading the data: ' + error.message);
         });
-    })
-    .catch(error => {
-        console.error('Error loading the data:', error);
-        alert('Error loading the data: ' + error.message);
-    });
+    } else {
+        console.error('Canvas element not found!');
+    }
 });
 </script>
 

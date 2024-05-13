@@ -1,7 +1,6 @@
 <script>
-// Aguardar o DOM estar completamente carregado
 document.addEventListener('DOMContentLoaded', function() {
-    const canvas = document.getElementById('myPieChart');
+    const canvas = document.getElementById('html1');
     if (canvas) {
         fetch('https://limpaimovel.com.br/_functions/myChartData')
         .then(response => {
@@ -23,17 +22,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     }]
                 },
                 options: {
-                    responsive: true
-                }
-            });
-        })
-        .catch(error => {
-            console.error('Error loading the data:', error);
-            alert('Error loading the data: ' + error.message);
-        });
-    } else {
-        console.error('Canvas element not found!');
-    }
+            responsive: true
+        }
+      });
+    })
+    .catch(error => {
+        console.error('Error loading the data:', error);
+        alert('Error loading the data: ' + error.message);
+    });
+  } else {
+    console.error('Canvas element not found!');
+  }
 });
 </script>
-

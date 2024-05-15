@@ -17,7 +17,14 @@
     document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('html1');
         if (canvas) {
-            fetch('https://limpaimovel.com.br/_functions/myChartData')
+            // Obtenha o ID do imóvel da URL da página dinâmica
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemId = urlParams.get("itemId");
+
+            // Construa a URL com o itemId para buscar os dados
+            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?itemId=${itemId}`;
+
+            fetch(dataUrl)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok: ' + response.statusText);
@@ -31,20 +38,19 @@
                     data: {
                         labels: ['Frações restantes', 'Fração adquirida'],
                         datasets: [{
-                            data: [parseInt(data.outraParte, 10), parseInt(data.suaParte, 10)],
+                            data: [parseFloat(data.outraParte), parseFloat(data.suaParte)],
                             backgroundColor: ['#00C4F5', '#0E344A'],
                             hoverBackgroundColor: ['#AAEEFF', '#B1D8E3']
                         }]
                     },
                     options: {
-                    responsive: true,
-                    legend: {
-                        display: false  // Desativa a exibição da legenda
+                        responsive: true,
+                        legend: {
+                            display: false  // Desativa a exibição da legenda
+                        }
                     }
-                }
-            });
-        })
-
+                });
+            })
             .catch(error => {
                 console.error('Error loading the data:', error);
                 alert('Error loading the data: ' + error.message);

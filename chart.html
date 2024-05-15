@@ -17,11 +17,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('html1');
         if (canvas) {
-            // Obtenha o título do imóvel da URL da página dinâmica
             const itemName = decodeURIComponent(window.location.pathname.split('/').pop());
             console.log("Título do imóvel obtido da URL:", itemName);
 
-            // Construa a URL com o título do imóvel para buscar os dados
             const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?title=${encodeURIComponent(itemName)}`;
             console.log("URL para buscar os dados:", dataUrl);
 
@@ -65,6 +63,7 @@
     </script>
 </body>
 </html>
+
 
 
 

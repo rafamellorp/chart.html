@@ -17,17 +17,11 @@
     document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('html1');
         if (canvas) {
-            // Obtenha o ID do imóvel da URL da página dinâmica
-            const itemId = new URLSearchParams(window.location.search).get("itemId");
+            // Obtenha o title do imóvel da URL da página dinâmica
+            const itemTitle = decodeURIComponent(window.location.pathname.split('/').pop());
 
-            // Verifique se itemId está presente
-            if (!itemId) {
-                console.error('Item ID não encontrado na URL.');
-                return;
-            }
-
-            // Construa a URL com o itemId para buscar os dados
-            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?itemId=${itemId}`;
+            // Construa a URL com o itemTitle para buscar os dados
+            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?itemTitle=${itemTitle}`;
 
             fetch(dataUrl)
             .then(response => {
@@ -65,6 +59,9 @@
         }
     });
     </script>
+</body>
+</html>
+
 </body>
 </html>
 

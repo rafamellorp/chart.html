@@ -20,7 +20,7 @@
             const itemName = decodeURIComponent(window.location.pathname.split('/').pop());
             console.log("Título do imóvel obtido da URL:", itemName);
 
-            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?title=${encodeURIComponent(itemName)}`;
+            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?Nome%20do%20Im%C3%B3vel=${encodeURIComponent(itemName)}`;
             console.log("URL para buscar os dados:", dataUrl);
 
             fetch(dataUrl)
@@ -63,7 +63,6 @@
     </script>
 </body>
 </html>
-
 
 
 

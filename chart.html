@@ -17,11 +17,11 @@
     document.addEventListener('DOMContentLoaded', function() {
         const canvas = document.getElementById('html1');
         if (canvas) {
-            // Obtenha o title do imóvel da URL da página dinâmica
-            const itemTitle = decodeURIComponent(window.location.pathname.split('/').pop());
+            // Obtenha o Nome do Imóvel da URL da página dinâmica
+            const itemName = decodeURIComponent(window.location.pathname.split('/').pop());
 
-            // Construa a URL com o itemTitle para buscar os dados
-            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?itemTitle=${itemTitle}`;
+            // Construa a URL com o Nome do Imóvel para buscar os dados
+            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?Nome%20do%20Im%C3%B3vel=${itemName}`;
 
             fetch(dataUrl)
             .then(response => {
@@ -61,6 +61,7 @@
     </script>
 </body>
 </html>
+
 
 </body>
 </html>

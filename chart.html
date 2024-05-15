@@ -21,7 +21,7 @@
             const itemName = decodeURIComponent(window.location.pathname.split('/').pop());
 
             // Construa a URL com o Nome do Imóvel para buscar os dados
-            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?Nome%20do%20Im%C3%B3vel=${itemName}`;
+            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?Nome%20do%20Im%C3%B3vel=${encodeURIComponent(itemName)}`;
 
             fetch(dataUrl)
             .then(response => {
@@ -61,6 +61,7 @@
     </script>
 </body>
 </html>
+
 
 
 </body>

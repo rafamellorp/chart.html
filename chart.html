@@ -22,7 +22,7 @@
             console.log("Nome do Imóvel obtido da URL:", itemName);
 
             // Construa a URL com o Nome do Imóvel para buscar os dados
-            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?nomeDoImovel=${encodeURIComponent(itemName)}`;
+            const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?Nome%20do%20Im%C3%B3vel=${encodeURIComponent(itemName)}`;
             console.log("URL para buscar os dados:", dataUrl);
 
             fetch(dataUrl)
@@ -65,12 +65,6 @@
 </body>
 </html>
 
-
-
-
-
-</body>
-</html>
 
 
 

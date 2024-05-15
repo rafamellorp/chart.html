@@ -18,8 +18,13 @@
         const canvas = document.getElementById('html1');
         if (canvas) {
             // Obtenha o ID do imóvel da URL da página dinâmica
-            const urlParams = new URLSearchParams(window.location.search);
-            const itemId = urlParams.get("itemId");
+            const itemId = new URLSearchParams(window.location.search).get("itemId");
+
+            // Verifique se itemId está presente
+            if (!itemId) {
+                console.error('Item ID não encontrado na URL.');
+                return;
+            }
 
             // Construa a URL com o itemId para buscar os dados
             const dataUrl = `https://limpaimovel.com.br/_functions/myChartData?itemId=${itemId}`;
@@ -62,4 +67,5 @@
     </script>
 </body>
 </html>
+
 
